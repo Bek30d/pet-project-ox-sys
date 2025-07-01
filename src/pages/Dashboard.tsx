@@ -5,7 +5,7 @@ import {
   UserOutlined,
   ShoppingCartOutlined,
   DollarOutlined,
-  TrendingUpOutlined,
+  RiseOutlined,
 } from '@ant-design/icons';
 import AdminLayout from '../components/AdminLayout';
 
@@ -124,7 +124,7 @@ const Dashboard: React.FC = () => {
               <Statistic
                 title="O'sish"
                 value={11.28}
-                prefix={<TrendingUpOutlined />}
+                prefix={<RiseOutlined />}
                 suffix="%"
                 valueStyle={{ color: '#3f8600' }}
               />

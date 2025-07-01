@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -106,7 +105,7 @@ const Settings: React.FC = () => {
             </Col>
 
             <Col xs={24} lg={12}>
-              <Card title="Xavfsizlik sozlamalari" icon={<SecurityScanOutlined />}>
+              <Card title="Xavfsizlik sozlamalari">
                 <Form.Item name="securityLevel" label="Xavfsizlik darajasi">
                   <Select>
                     <Option value="low">Past</Option>
@@ -136,7 +135,7 @@ const Settings: React.FC = () => {
             </Col>
           </Row>
 
-          <Card title="Bildirishnoma sozlamalari" icon={<BellOutlined />}>
+          <Card title="Bildirishnoma sozlamalari">
             <Row gutter={[24, 0]}>
               <Col xs={24} sm={12}>
                 <Form.Item name="emailNotifications" valuePropName="checked">
