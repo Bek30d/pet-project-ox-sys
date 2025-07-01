@@ -56,18 +56,16 @@ const Login: React.FC = () => {
         >
           <Form.Item
             name="username"
-            label="Foydalanuvchi nomi"
-            rules={[
-              { required: true, message: "Foydalanuvchi nomini kiriting!" },
-            ]}
+            label="Users name"
+            rules={[{ required: true, message: "Enter the name" }]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Foydalanuvchi nomi" />
+            <Input prefix={<UserOutlined />} placeholder="User name" />
           </Form.Item>
 
           <Form.Item
             name="password"
-            label="Parol"
-            rules={[{ required: true, message: "Parolni kiriting!" }]}
+            label="Password"
+            rules={[{ required: true, message: "Enter the password" }]}
           >
             <Input.Password prefix={<LockOutlined />} placeholder="Parol" />
           </Form.Item>
@@ -75,7 +73,7 @@ const Login: React.FC = () => {
           <Form.Item
             name="subdomain"
             label="Subdomain"
-            rules={[{ required: true, message: "Subdomainni kiriting!" }]}
+            rules={[{ required: true, message: "Enter the subdomain" }]}
           >
             <Input prefix={<GlobalOutlined />} placeholder="Subdomain" />
           </Form.Item>
@@ -88,7 +86,7 @@ const Login: React.FC = () => {
               loading={loading}
               disabled={loading}
             >
-              {loading ? <Spin size="small" /> : "Kirish"}
+              {loading ? <Spin size="small" /> : "Login"}
             </Button>
           </Form.Item>
         </Form>

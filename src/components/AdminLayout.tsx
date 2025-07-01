@@ -31,7 +31,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     {
       key: "/users",
       icon: <UserOutlined />,
-      label: "Foydalanuvchilar",
+      label: "Users",
     },
   ];
 

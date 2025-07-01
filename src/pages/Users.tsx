@@ -88,11 +88,11 @@ const Users: React.FC = () => {
       width: 60,
     },
     {
-      title: "Ism",
+      title: "Name",
       dataIndex: "name",
       key: "name",
       filteredValue: [searchText],
-      onFilter: (value: any, record: User) =>
+      onFilter: (value: string, record: User) =>
         record.name.toLowerCase().includes(value.toLowerCase()) ||
         record.email.toLowerCase().includes(value.toLowerCase()),
     },
@@ -102,7 +102,7 @@ const Users: React.FC = () => {
       key: "email",
     },
     {
-      title: "Rol",
+      title: "Role",
       dataIndex: "role",
       key: "role",
       render: (role: string) => {
@@ -120,19 +120,19 @@ const Users: React.FC = () => {
       key: "status",
       render: (status: string) => (
         <Tag color={status === "active" ? "green" : "red"}>
-          {status === "active" ? "Faol" : "Nofaol"}
+          {status === "active" ? "Active" : "Inactive"}
         </Tag>
       ),
     },
     {
-      title: "Yaratilgan sana",
+      title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
     },
     {
-      title: "Amallar",
+      title: "Actions",
       key: "actions",
-      render: (_: any, record: User) => (
+      render: (_: unknown, record: User) => (
         <Space>
           <Button
             type="primary"
@@ -140,7 +140,7 @@ const Users: React.FC = () => {
             size="small"
             onClick={() => handleEdit(record)}
           >
-            Tahrirlash
+            Edit
           </Button>
           <Button
             danger
@@ -148,7 +148,7 @@ const Users: React.FC = () => {
             size="small"
             onClick={() => handleDelete(record.id)}
           >
-            O'chirish
+            Delete
           </Button>
         </Space>
       ),
@@ -169,13 +169,13 @@ const Users: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: "Foydalanuvchini o'chirish",
-      content: "Haqiqatan ham bu foydalanuvchini o'chirmoqchimisiz?",
-      okText: "Ha",
-      cancelText: "Yo'q",
+      title: "Delete user",
+      content: "Are you sure you want to delete this user?",
+      okText: "Yes",
+      cancelText: "no",
       onOk: () => {
         setUsers(users.filter((user) => user.id !== id));
-        message.success("Foydalanuvchi muvaffaqiyatli o'chirildi");
+        message.success("User deleted successfully");
       },
     });
   };
@@ -188,7 +188,7 @@ const Users: React.FC = () => {
             user.id === editingUser.id ? { ...user, ...values } : user
           )
         );
-        message.success("Foydalanuvchi ma'lumotlari yangilandi");
+        message.success("user data changed");
       } else {
         const newUser: User = {
           key: String(users.length + 1),
@@ -197,7 +197,7 @@ const Users: React.FC = () => {
           createdAt: new Date().toISOString().split("T")[0],
         };
         setUsers([...users, newUser]);
-        message.success("Yangi foydalanuvchi qo'shildi");
+        message.success("User added successfully");
       }
       setIsModalVisible(false);
     });
@@ -211,16 +211,16 @@ const Users: React.FC = () => {
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <Title level={2}>Foydalanuvchilar</Title>
+          <Title level={2}>Users</Title>
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            Yangi foydalanuvchi
+            New User
           </Button>
         </div>
 
         <Card>
           <div className="mb-4">
             <Input
-              placeholder="Foydalanuvchi yoki email bo'yicha qidirish..."
+              placeholder="Search"
               prefix={<SearchOutlined />}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
@@ -236,26 +236,24 @@ const Users: React.FC = () => {
               showSizeChanger: true,
               showQuickJumper: true,
               showTotal: (total, range) =>
-                `${range[0]}-${range[1]} / ${total} ta foydalanuvchi`,
+                `${range[0]}-${range[1]} / ${total} items`,
             }}
           />
         </Card>
 
         <Modal
-          title={
-            editingUser ? "Foydalanuvchini tahrirlash" : "Yangi foydalanuvchi"
-          }
+          title={editingUser ? "Change" : "Add user"}
           open={isModalVisible}
           onOk={handleModalOk}
           onCancel={handleModalCancel}
-          okText="Saqlash"
-          cancelText="Bekor qilish"
+          okText="Save"
+          cancelText="Cancel"
         >
           <Form form={form} layout="vertical">
             <Form.Item
               name="name"
               label="Ism"
-              rules={[{ required: true, message: "Ismni kiriting!" }]}
+              rules={[{ required: true, message: "Enter the name!" }]}
             >
               <Input />
             </Form.Item>
@@ -263,8 +261,8 @@ const Users: React.FC = () => {
               name="email"
               label="Email"
               rules={[
-                { required: true, message: "Emailni kiriting!" },
-                { type: "email", message: "To'g'ri email kiriting!" },
+                { required: true, message: "Enter the email!" },
+                { type: "email", message: "Invalid email!" },
               ]}
             >
               <Input />
@@ -272,7 +270,7 @@ const Users: React.FC = () => {
             <Form.Item
               name="role"
               label="Rol"
-              rules={[{ required: true, message: "Rolni tanlang!" }]}
+              rules={[{ required: true, message: "Select a role!" }]}
             >
               <Select>
                 <Option value="user">User</Option>
@@ -283,11 +281,11 @@ const Users: React.FC = () => {
             <Form.Item
               name="status"
               label="Status"
-              rules={[{ required: true, message: "Statusni tanlang!" }]}
+              rules={[{ required: true, message: "Select status!" }]}
             >
               <Select>
-                <Option value="active">Faol</Option>
-                <Option value="inactive">Nofaol</Option>
+                <Option value="active">Active</Option>
+                <Option value="inactive">Inactive</Option>
               </Select>
             </Form.Item>
           </Form>
