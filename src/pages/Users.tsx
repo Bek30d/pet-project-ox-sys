@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Card,
   Table,
@@ -12,14 +11,14 @@ import {
   Select,
   Typography,
   message,
-} from 'antd';
+} from "antd";
 import {
   PlusOutlined,
   SearchOutlined,
   EditOutlined,
   DeleteOutlined,
-} from '@ant-design/icons';
-import AdminLayout from '../components/AdminLayout';
+} from "@ant-design/icons";
+import AdminLayout from "../components/AdminLayout";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -30,52 +29,52 @@ interface User {
   name: string;
   email: string;
   role: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
   createdAt: string;
 }
 
 const Users: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [form] = Form.useForm();
 
   const initialData: User[] = [
     {
-      key: '1',
+      key: "1",
       id: 1,
-      name: 'Alisher Karimov',
-      email: 'alisher@example.com',
-      role: 'admin',
-      status: 'active',
-      createdAt: '2024-01-15',
+      name: "Alisher Karimov",
+      email: "alisher@example.com",
+      role: "admin",
+      status: "active",
+      createdAt: "2024-01-15",
     },
     {
-      key: '2',
+      key: "2",
       id: 2,
-      name: 'Mohira Tosheva',
-      email: 'mohira@example.com',
-      role: 'user',
-      status: 'active',
-      createdAt: '2024-01-20',
+      name: "Mohira Tosheva",
+      email: "mohira@example.com",
+      role: "user",
+      status: "active",
+      createdAt: "2024-01-20",
     },
     {
-      key: '3',
+      key: "3",
       id: 3,
-      name: 'Bobur Rahimov',
-      email: 'bobur@example.com',
-      role: 'user',
-      status: 'inactive',
-      createdAt: '2024-01-25',
+      name: "Bobur Rahimov",
+      email: "bobur@example.com",
+      role: "user",
+      status: "inactive",
+      createdAt: "2024-01-25",
     },
     {
-      key: '4',
+      key: "4",
       id: 4,
-      name: 'Sevara Nazarova',
-      email: 'sevara@example.com',
-      role: 'moderator',
-      status: 'active',
-      createdAt: '2024-02-01',
+      name: "Sevara Nazarova",
+      email: "sevara@example.com",
+      role: "moderator",
+      status: "active",
+      createdAt: "2024-02-01",
     },
   ];
 
@@ -83,56 +82,56 @@ const Users: React.FC = () => {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
       width: 60,
     },
     {
-      title: 'Ism',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Ism",
+      dataIndex: "name",
+      key: "name",
       filteredValue: [searchText],
       onFilter: (value: any, record: User) =>
         record.name.toLowerCase().includes(value.toLowerCase()) ||
         record.email.toLowerCase().includes(value.toLowerCase()),
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: 'Rol',
-      dataIndex: 'role',
-      key: 'role',
+      title: "Rol",
+      dataIndex: "role",
+      key: "role",
       render: (role: string) => {
         const colors: Record<string, string> = {
-          admin: 'red',
-          moderator: 'blue',
-          user: 'green',
+          admin: "red",
+          moderator: "blue",
+          user: "green",
         };
         return <Tag color={colors[role]}>{role.toUpperCase()}</Tag>;
       },
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       render: (status: string) => (
-        <Tag color={status === 'active' ? 'green' : 'red'}>
-          {status === 'active' ? 'Faol' : 'Nofaol'}
+        <Tag color={status === "active" ? "green" : "red"}>
+          {status === "active" ? "Faol" : "Nofaol"}
         </Tag>
       ),
     },
     {
-      title: 'Yaratilgan sana',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      title: "Yaratilgan sana",
+      dataIndex: "createdAt",
+      key: "createdAt",
     },
     {
-      title: 'Amallar',
-      key: 'actions',
+      title: "Amallar",
+      key: "actions",
       render: (_: any, record: User) => (
         <Space>
           <Button
@@ -170,37 +169,35 @@ const Users: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: 'Foydalanuvchini o\'chirish',
-      content: 'Haqiqatan ham bu foydalanuvchini o\'chirmoqchimisiz?',
-      okText: 'Ha',
-      cancelText: 'Yo\'q',
+      title: "Foydalanuvchini o'chirish",
+      content: "Haqiqatan ham bu foydalanuvchini o'chirmoqchimisiz?",
+      okText: "Ha",
+      cancelText: "Yo'q",
       onOk: () => {
-        setUsers(users.filter(user => user.id !== id));
-        message.success('Foydalanuvchi muvaffaqiyatli o\'chirildi');
+        setUsers(users.filter((user) => user.id !== id));
+        message.success("Foydalanuvchi muvaffaqiyatli o'chirildi");
       },
     });
   };
 
   const handleModalOk = () => {
-    form.validateFields().then(values => {
+    form.validateFields().then((values) => {
       if (editingUser) {
-        // Edit existing user
-        setUsers(users.map(user => 
-          user.id === editingUser.id 
-            ? { ...user, ...values }
-            : user
-        ));
-        message.success('Foydalanuvchi ma\'lumotlari yangilandi');
+        setUsers(
+          users.map((user) =>
+            user.id === editingUser.id ? { ...user, ...values } : user
+          )
+        );
+        message.success("Foydalanuvchi ma'lumotlari yangilandi");
       } else {
-        // Add new user
         const newUser: User = {
           key: String(users.length + 1),
           id: users.length + 1,
           ...values,
-          createdAt: new Date().toISOString().split('T')[0],
+          createdAt: new Date().toISOString().split("T")[0],
         };
         setUsers([...users, newUser]);
-        message.success('Yangi foydalanuvchi qo\'shildi');
+        message.success("Yangi foydalanuvchi qo'shildi");
       }
       setIsModalVisible(false);
     });
@@ -226,7 +223,7 @@ const Users: React.FC = () => {
               placeholder="Foydalanuvchi yoki email bo'yicha qidirish..."
               prefix={<SearchOutlined />}
               value={searchText}
-              onChange={e => setSearchText(e.target.value)}
+              onChange={(e) => setSearchText(e.target.value)}
               className="max-w-sm"
             />
           </div>
@@ -245,7 +242,9 @@ const Users: React.FC = () => {
         </Card>
 
         <Modal
-          title={editingUser ? 'Foydalanuvchini tahrirlash' : 'Yangi foydalanuvchi'}
+          title={
+            editingUser ? "Foydalanuvchini tahrirlash" : "Yangi foydalanuvchi"
+          }
           open={isModalVisible}
           onOk={handleModalOk}
           onCancel={handleModalCancel}
@@ -256,7 +255,7 @@ const Users: React.FC = () => {
             <Form.Item
               name="name"
               label="Ism"
-              rules={[{ required: true, message: 'Ismni kiriting!' }]}
+              rules={[{ required: true, message: "Ismni kiriting!" }]}
             >
               <Input />
             </Form.Item>
@@ -264,8 +263,8 @@ const Users: React.FC = () => {
               name="email"
               label="Email"
               rules={[
-                { required: true, message: 'Emailni kiriting!' },
-                { type: 'email', message: 'To\'g\'ri email kiriting!' },
+                { required: true, message: "Emailni kiriting!" },
+                { type: "email", message: "To'g'ri email kiriting!" },
               ]}
             >
               <Input />
@@ -273,7 +272,7 @@ const Users: React.FC = () => {
             <Form.Item
               name="role"
               label="Rol"
-              rules={[{ required: true, message: 'Rolni tanlang!' }]}
+              rules={[{ required: true, message: "Rolni tanlang!" }]}
             >
               <Select>
                 <Option value="user">User</Option>
@@ -284,7 +283,7 @@ const Users: React.FC = () => {
             <Form.Item
               name="status"
               label="Status"
-              rules={[{ required: true, message: 'Statusni tanlang!' }]}
+              rules={[{ required: true, message: "Statusni tanlang!" }]}
             >
               <Select>
                 <Option value="active">Faol</Option>

@@ -1,16 +1,13 @@
-
-import React, { useState } from 'react';
-import { Layout, Menu, Button, Typography, Avatar, Dropdown } from 'antd';
+import React, { useState } from "react";
+import { Layout, Menu, Button, Typography, Avatar, Dropdown } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  DashboardOutlined,
   UserOutlined,
-  SettingOutlined,
   LogoutOutlined,
-} from '@ant-design/icons';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+} from "@ant-design/icons";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -27,40 +24,22 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const menuItems = [
     {
-      key: '/dashboard',
-      icon: <DashboardOutlined />,
-      label: 'Dashboard',
-    },
-    {
-      key: '/users',
+      key: "/users",
       icon: <UserOutlined />,
-      label: 'Foydalanuvchilar',
-    },
-    {
-      key: '/settings',
-      icon: <SettingOutlined />,
-      label: 'Sozlamalar',
+      label: "Foydalanuvchilar",
     },
   ];
 
   const userMenuItems = [
     {
-      key: 'profile',
-      icon: <UserOutlined />,
-      label: 'Profil',
-    },
-    {
-      type: 'divider' as const,
-    },
-    {
-      key: 'logout',
+      key: "logout",
       icon: <LogoutOutlined />,
-      label: 'Chiqish',
+      label: "Chiqish",
       onClick: handleLogout,
     },
   ];
@@ -75,7 +54,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       >
         <div className="p-4 text-center border-b">
           <Text strong className="text-lg">
-            {collapsed ? 'AP' : 'Admin Panel'}
+            {collapsed ? "AP" : "Admin Panel"}
           </Text>
         </div>
         <Menu
@@ -100,10 +79,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             <Text type="secondary">
               {user?.subdomain} • {user?.username}
             </Text>
-            <Dropdown
-              menu={{ items: userMenuItems }}
-              placement="bottomRight"
-            >
+            <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <Avatar
                 icon={<UserOutlined />}
                 className="cursor-pointer bg-blue-500"
@@ -112,9 +88,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
         </Header>
 
-        <Content className="p-6 bg-gray-50">
-          {children}
-        </Content>
+        <Content className="p-6 bg-gray-50">{children}</Content>
       </Layout>
     </Layout>
   );
