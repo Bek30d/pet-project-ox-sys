@@ -38,14 +38,6 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleFillTestData = () => {
-    form.setFieldsValue({
-      username: "user_task",
-      password: "user_task",
-      subdomain: "toko",
-    });
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md shadow-xl">
@@ -53,9 +45,6 @@ const Login: React.FC = () => {
           <Title level={2} className="text-gray-800 mb-2">
             Admin Panel
           </Title>
-          <Text type="secondary">
-            Tizimga kirish uchun ma'lumotlaringizni kiriting
-          </Text>
         </div>
 
         <Form
@@ -102,29 +91,7 @@ const Login: React.FC = () => {
               {loading ? <Spin size="small" /> : "Kirish"}
             </Button>
           </Form.Item>
-
-          <div className="text-center">
-            <Button
-              type="link"
-              onClick={handleFillTestData}
-              className="text-sm"
-            >
-              Test ma'lumotlarini yuklash
-            </Button>
-          </div>
         </Form>
-
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <Text type="secondary" className="text-xs">
-            <strong>Test ma'lumotlari:</strong>
-            <br />
-            Username: user_task
-            <br />
-            Password: user_task
-            <br />
-            Subdomain: toko
-          </Text>
-        </div>
       </Card>
     </div>
   );
